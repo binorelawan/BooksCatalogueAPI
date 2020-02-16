@@ -31,6 +31,7 @@ namespace BooksCatalogueAPI
             services.AddControllers();
             services.AddDbContext<MyDatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
             services.Configure<AzureStorageConfig>(Configuration.GetSection("AzureStorageConfig"));
+            services.AddSwaggerDocument();
 
         }
 
@@ -52,6 +53,9 @@ namespace BooksCatalogueAPI
             {
                 endpoints.MapControllers();
             });
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
         }
     }
 }
